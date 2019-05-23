@@ -15,7 +15,7 @@ alter role myprojectuser set timezone to 'utc';
 grant all privileges on database myproject to myprojectuser;
 
 \c myproject
-create extension pgcrypto;
+create extension if not exists pgcrypto;
 set role myprojectuser;
 
 -- *****************************************************************************************
@@ -24,7 +24,7 @@ set role myprojectuser;
 -- export PGOPTIONS="-c myproject.encrypt_key=XXXXX"
 -- *****************************************************************************************
 
-create table customer (
+create table if not exists customer (
     "id" serial not null primary key,
     "first_name" varchar(256) not null,
     "last_name" varchar(256) not null
